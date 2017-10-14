@@ -1,6 +1,11 @@
 function [params] = appendMember(params,c,abundance,death_rate)
-%APPENDMEMBER Summary of this function goes here
-%   Detailed explanation goes here
+%APPENDMEMBER takes a parmater structure and appends a new member (consumer vector) onto this structure
+%   inputs:
+%		 params : mcrm paramater structure
+%	     c : consumer vector (1XM dim)
+%	     abundance : initial abundance of this consumer
+%		 dealth rate: rate that this species dies relative to per capita growth (usually set to 0)
+ 
 
 params.x0 = [params.x0(params.varIdx.species);abundance;params.x0(params.varIdx.resources)];
 params.varIdx.species = [params.varIdx.species,params.varIdx.species(end)+1];

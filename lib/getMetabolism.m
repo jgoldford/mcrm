@@ -1,6 +1,6 @@
 function [ D ] = getMetabolism(numResources,flag,p)
-%GETMETABOLISM Summary of this function goes here
-%   Detailed explanation goes here
+%GETMETABOLISM Function used to generate random stoichiometric matricies
+
 
 switch flag
     case 'thermo'

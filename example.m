@@ -22,7 +22,7 @@ D = getMetabolism(numResource,'rand',1/numResource);
 % determine how much of the community you want to be specialists vs.
 % generalists
 % more generalist, set to 1/M, and more specialist set to 0.9
-specialist = 0.2;
+specialist = 0.5;
 
 specialistVariation = 0.01;
 
@@ -40,19 +40,32 @@ params = mcrm_params(1,numSpecies,out.C(k,:),D,'eye','');
 
 % run ODE solver for ecosystem
 r = run_mcrm(params);
-g = out.group(k((r.communityStruct > 1e-4)));
-x = r.communityStruct(r.communityStruct > 1e-4);
+figure();
+subplot(1,3,1);
+plot(r.species);
+ylabel('species abundance');
 
-% compute the coarse grained structure of the community
-%x = coarseGrainCommunityStructure(r.communityStruct,out.group(k),numGroups);
-% figure();
+
+
+g = out.group(k((r.communityStruct > 1e-4)));
+% x = r.communityStruct(r.communityStruct > 1e-4);
+% 
+% subplot(1,3,2);
 % pie(x)
-% legend(arrayfun(@(x) ['Family ',num2str(x)],1:numGroups,'uni',0));
+% compute the coarse grained structure of the community
+x = coarseGrainCommunityStructure(r.communityStruct,out.group(k),numGroups);
+%figure();
+subplot(1,2,2) 
+x(x<1e-10) = 0;
+pie(x+1e-20)
+legend(arrayfun(@(x) ['Family ',num2str(x)],1:numGroups,'uni',0));
 
 % how  stable is the community to species loss?
 % this function reduces the parameter structure to only include species
 % that survived in the prior simulation
 p_new = removeExtinctSpecies(params,r,1e-4);
+
+
 % knockout a species (i.e. set it's consumption rates to zero)
 
 I = zeros(p_new.num_species);

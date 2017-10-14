@@ -1,6 +1,7 @@
 
 function [output] = run_mcrm(params)
 
+% parse input
 num_species = params.num_species;
 num_resources = params.num_resources;
 varIdx = params.varIdx;
@@ -19,7 +20,6 @@ alpha = params.alpha;
 
 % create a function handle for dynamics
 y = @(t,x) population_dynamics(t,x,num_species,C,D,W,T,mu,alpha,death_rate,B,tau,varIdx);
-
 
 % solve ODE
 [T,Y] = ode15s(y,1:timeSteps,x0);

@@ -1,5 +1,8 @@
 function [params_out] = evolve_member(params,percentChange)
-%EVOLVE_MEMBER Summary of this function goes here
+%EVOLVE_MEMBER takes a parameter structure, copies a random member and
+%"mutates" the consumer vector by a max. percent change.  This new member
+%is appended into the mcrm structure
+
 %   Detailed explanation goes here
 species = randsample(1:params.num_species,1);
 total = sum(params.C(species,:));
@@ -15,7 +18,7 @@ end
 uptake(uptake<0) = 0;
 uptake = uptake./sum(uptake);
 
-% now there is a small chance of changing the total enzyme capacity thought
+% now there is a small chance of changing the total enzyme capacity through
 % some global mutation
 p_change = 0;
 q = binornd(1,p_change);

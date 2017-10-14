@@ -1,5 +1,14 @@
 
-function [params] = mcrm_params(ranked_quality,num_species,C,D,qual,ctype)
+function [params] = mcrm_params(resourceIdx,num_species,C,D,qual,ctype)
+% construct the param structure for the MCRM ode solver
+% resourceIdx = vector of indexes to specify which resources are non-zero (default value for resource
+% abundance is 1e6).  
+% num_species = total number of species
+% C = the consumer matrix
+% D = global stoichiometric matrix
+% qual = type of resource qualities ('rand' or 'ranked')
+% ctype = not used here (need to remove this and update code)
+
 
 % specify the number of species and resources in simulation
 %num_species = 100;
@@ -43,7 +52,7 @@ mu = 1;
 % set input of nutrients;  in this simulation I am only inputting 1
 % nutrient of variable (ranked_quality) qauality
 alpha = zeros(num_resources,1);
-alpha(ranked_quality) = 1e6;
+alpha(resourceIdx) = 1e6;
 
 % define maintenance value for all species 
 T = 1;

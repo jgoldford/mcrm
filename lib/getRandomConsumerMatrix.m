@@ -1,16 +1,7 @@
 function [C] = getRandomConsumerMatrix(numSpecies,numResources,ctype)
-%p = inputParser;
-%parse(p,numSpecies,numResources,varargin)
-%addParameter(p,'normalized',false)
+% function to greate random consumer matricies
+% if ctype is normalized, then make sure sum_alpha c_i,alpha = 1
 
-% distributionSets = {'uniform','normal','lognormal'};
-% 
-% % find the distribution used in type provided
-% if ~isfield(p.Results,'distribution')
-%     dist = 'uniform';
-% else
-%     dist = p.Results.distribution;
-% end
 if ~isfield(ctype,'normalized')
     normalizedBool = true;
 else

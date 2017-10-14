@@ -1,10 +1,11 @@
-function [ params ] = removeExtinctSpecies(params,simulation,minRelativeAbundance)
-%REVMOVEEXTINCTSPECIES Summary of this function goes here
-%   Detailed explanation goes here
+function [ params ] = removeExtinctSpecies(params,simulation,minAbundance)
+%REVMOVEEXTINCTSPECIES removes species at the end of the simulation that
+%are zero
+%  
 
 x = simulation.species(end,:);
 x(x<0) = 0;
-k = x > minRelativeAbundance;
+k = x > minAbundance;
 params.num_species = sum(k);
 params.varIdx.species = 1:(params.num_species);
 params.varIdx.resources = (params.num_species+1):(params.num_resources + params.num_species);

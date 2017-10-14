@@ -1,4 +1,4 @@
 function [coarsedGrainedAbundanceVec] = coarseGrainCommunityStructure(abundanceVector,groupVector,maxGroups)
-% function just sums the total abundance for each group
+% function sums the total abundance within each group (groupVector conains the group id for each species)
 coarsedGrainedAbundanceVec = arrayfun(@(y) sum(abundanceVector(groupVector==y)),1:maxGroups);
 end
